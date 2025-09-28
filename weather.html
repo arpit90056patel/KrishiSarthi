@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Weather Forecast - Krishi Sarthi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <style>
+        .weather-card {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .weather-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .weather-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .sunny { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .cloudy { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .rainy { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .temp-display {
+            font-size: 3rem;
+            font-weight: 800;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .weather-icon {
+            font-size: 4rem;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-gray-800">
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-50 bg-white shadow text-black">
+        <nav class="flex justify-between px-5 py-2 items-center">
+            <!-- Logo + Heading -->
+            <div class="flex items-center space-x-3">
+                <a href="index.html">
+                    <img class="w-5 md:w-16" src="images/logo.png" alt="Logo">
+                </a>
+                <a href="index.html"><h1 class="text-xl md:text-2xl text-green-900 font-bold" data-i18n="title">Krishi Sarthi</h1></a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-2 font-medium">
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="index.html" data-i18n="home">Home</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="schemes">Schemes</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="market_prices">Market Prices</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="weather">Weather</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#contact" data-i18n="contact">Contact Us</a>
+                <select class="language-select bg-green-500 text-white rounded-lg px-2 py-1 text-sm">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ml">മലയാളം</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="mr">मराठी</option>
+                    <option value="gu">ગુજરાતી</option>
+                    <option value="pa">ਪੰਜਾਬੀ</option>
+                </select>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-5 pb-4">
+            <a href="index.html" class="block py-2 text-green-800" data-i18n="home">Home</a>
+            <a href="#services" class="block py-2 text-green-800" data-i18n="schemes">Schemes</a>
+            <a href="#services" class="block py-2 text-green-800" data-i18n="market_prices">Market Prices</a>
+            <a href="#services" class="block py-2 text-green-800" data-i18n="weather">Weather</a>
+            <a href="#contact" class="block py-2 text-green-800" data-i18n="contact">Contact Us</a>
+            <select class="language-select bg-green-500 text-white rounded-lg px-2 py-1 text-sm">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ml">മലയാളം</option>
+                <option value="ta">தமிழ்</option>
+                <option value="te">తెలుగు</option>
+                <option value="kn">ಕನ್ನಡ</option>
+                <option value="bn">বাংলা</option>
+                <option value="mr">मराठी</option>
+                <option value="gu">ગુજરાતી</option>
+                <option value="pa">ਪੰਜਾਬੀ</option>
+            </select>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-green-900 mb-4">Kerala Weather Forecast</h1>
+            <p class="text-lg text-gray-600">Detailed weather information for agricultural planning</p>
+        </div>
+
+        <!-- Location Input -->
+        <div class="max-w-2xl mx-auto mb-8">
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h2 class="text-xl font-semibold text-gray-800 mb-4">Get Weather for Your Location</h2>
+                <div class="flex flex-col md:flex-row gap-4">
+                    <div class="flex-1">
+                        <input 
+                            type="text" 
+                            id="cityInput" 
+                            placeholder="Enter city name (e.g., Kochi, Thiruvananthapuram)"
+                            class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                        />
+                    </div>
+                    <div class="flex gap-2">
+                        <button 
+                            id="searchBtn" 
+                            class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2"
+                        >
+                            Search
+                        </button>
+                        <button 
+                            id="locationBtn" 
+                            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium flex items-center gap-2"
+                        >
+                            Use Location
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Current Weather Display -->
+        <div id="currentWeather" class="hidden max-w-4xl mx-auto mb-8">
+            <div class="weather-bg rounded-lg shadow-lg p-8 text-white">
+                <div class="flex flex-col md:flex-row items-center justify-between">
+                    <div class="text-center md:text-left mb-6 md:mb-0">
+                        <h2 class="text-2xl font-semibold mb-2" id="currentLocation">Loading...</h2>
+                        <div class="temp-display" id="currentTemp">--°C</div>
+                        <p class="text-xl opacity-90" id="currentDesc">Loading...</p>
+                        <div class="grid grid-cols-2 gap-4 mt-4 text-sm">
+                            <div>
+                                <span class="opacity-75">Feels like:</span>
+                                <span class="font-medium ml-1" id="feelsLike">--°C</span>
+                            </div>
+                            <div>
+                                <span class="opacity-75">Humidity:</span>
+                                <span class="font-medium ml-1" id="currentHumidity">--%</span>
+                            </div>
+                            <div>
+                                <span class="opacity-75">Wind:</span>
+                                <span class="font-medium ml-1" id="currentWind">-- m/s</span>
+                            </div>
+                            <div>
+                                <span class="opacity-75">Pressure:</span>
+                                <span class="font-medium ml-1" id="currentPressure">-- hPa</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="weather-icon" id="currentIcon">☀️</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="hidden flex justify-center items-center py-12">
+            <div class="loading-spinner"></div>
+            <span class="ml-3 text-gray-600">Loading weather data...</span>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+            <p class="text-red-700 font-medium">Failed to load weather data</p>
+            <p class="text-red-600 text-sm mt-2" id="errorMessage">Please check your connection and try again</p>
+        </div>
+
+        <!-- 5-Day Forecast -->
+        <div id="forecastContainer" class="hidden max-w-6xl mx-auto">
+            <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">5-Day Weather Forecast</h2>
+            <div id="forecastGrid" class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-4">
+                <!-- Forecast cards will be inserted here -->
+            </div>
+        </div>
+
+        <!-- Agricultural Weather Tips -->
+        <div class="max-w-4xl mx-auto mt-12 bg-green-50 border border-green-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-green-900 mb-3">Agricultural Weather Advisory</h3>
+            <div id="weatherTips" class="text-green-800">
+                <p>Get weather information to receive personalized agricultural advice for Kerala farmers.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer class="w-full flex flex-col sm:flex-row justify-evenly p-6 bg-slate-900 animate-fade-in sm:gap-0" data-aos="fade-down">
+        <div class="p-4">
+            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="footer_home">Home</h2>
+            <ul class="text-white mt-3 mx-2 space-y-1">
+                <li data-i18n="about">About</li>
+                <li data-i18n="contact_us">Contact us</li>
+            </ul>
+        </div>
+        <div class="p-4">
+            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="faqs1">FAQs</h2>
+            <ul class="text-white mt-3 mx-2 space-y-1">
+                <li data-i18n="security">Security</li>
+                <li data-i18n="help">Help</li>
+            </ul>
+        </div>
+        <div class="p-4">
+            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="privacy_policy">Privacy Policy</h2>
+            <ul class="text-white mt-3 mx-2 space-y-1">
+                <li data-i18n="privacy">Privacy</li>
+                <li data-i18n="community">Community</li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="translation.js"></script>
+    <script src="contact.js"></script>
+    <script src="chat.js"></script>
+    <script src="schemes.js"></script>
+    <script src="src/js/auth-ui.js"></script>
+    <script>
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // API configuration - using OpenWeatherMap
+        const API_KEY = 'demo'; // In production, this would be your actual API key
+        const BASE_URL = 'https://api.openweathermap.org/data/2.5';
+
+        // DOM elements
+        const cityInput = document.getElementById('cityInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const locationBtn = document.getElementById('locationBtn');
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const errorMessage = document.getElementById('errorMessage');
+        const currentWeather = document.getElementById('currentWeather');
+        const forecastContainer = document.getElementById('forecastContainer');
+        const forecastGrid = document.getElementById('forecastGrid');
+        const weatherTips = document.getElementById('weatherTips');
+
+        // Sample weather data for all Kerala districts (for demo purposes)
+        const sampleWeatherData = {
+            'kochi': {
+                current: {
+                    location: 'Kochi, Kerala',
+                    temp: 28,
+                    feels_like: 32,
+                    humidity: 78,
+                    wind_speed: 3.2,
+                    pressure: 1013,
+                    description: 'Partly Cloudy',
+                    icon: '⛅'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 24, temp_max: 30, humidity: 78, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Tomorrow', temp_min: 25, temp_max: 31, humidity: 75, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 82, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 4', temp_min: 24, temp_max: 30, humidity: 80, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Day 5', temp_min: 26, temp_max: 32, humidity: 70, description: 'Sunny', icon: '☀️' }
+                ]
+            },
+            'thiruvananthapuram': {
+                current: {
+                    location: 'Thiruvananthapuram, Kerala',
+                    temp: 30,
+                    feels_like: 34,
+                    humidity: 75,
+                    wind_speed: 2.8,
+                    pressure: 1012,
+                    description: 'Sunny',
+                    icon: '☀️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 25, temp_max: 32, humidity: 75, description: 'Sunny', icon: '☀️' },
+                    { date: 'Tomorrow', temp_min: 24, temp_max: 31, humidity: 78, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 85, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 22, temp_max: 28, humidity: 88, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 5', temp_min: 24, temp_max: 30, humidity: 80, description: 'Cloudy', icon: '☁️' }
+                ]
+            },
+            'kozhikode': {
+                current: {
+                    location: 'Kozhikode, Kerala',
+                    temp: 27,
+                    feels_like: 31,
+                    humidity: 80,
+                    wind_speed: 4.1,
+                    pressure: 1014,
+                    description: 'Light Rain',
+                    icon: '🌦️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 23, temp_max: 29, humidity: 80, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Tomorrow', temp_min: 22, temp_max: 28, humidity: 85, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 3', temp_min: 24, temp_max: 30, humidity: 75, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 4', temp_min: 25, temp_max: 31, humidity: 72, description: 'Sunny', icon: '☀️' },
+                    { date: 'Day 5', temp_min: 26, temp_max: 32, humidity: 70, description: 'Sunny', icon: '☀️' }
+                ]
+            },
+            'kollam': {
+                current: {
+                    location: 'Kollam, Kerala',
+                    temp: 29,
+                    feels_like: 33,
+                    humidity: 76,
+                    wind_speed: 3.0,
+                    pressure: 1012,
+                    description: 'Partly Cloudy',
+                    icon: '⛅'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 25, temp_max: 31, humidity: 76, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Tomorrow', temp_min: 24, temp_max: 30, humidity: 80, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 85, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 4', temp_min: 24, temp_max: 30, humidity: 82, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Day 5', temp_min: 26, temp_max: 32, humidity: 72, description: 'Sunny', icon: '☀️' }
+                ]
+            },
+            'pathanamthitta': {
+                current: {
+                    location: 'Pathanamthitta, Kerala',
+                    temp: 26,
+                    feels_like: 30,
+                    humidity: 82,
+                    wind_speed: 2.5,
+                    pressure: 1015,
+                    description: 'Light Rain',
+                    icon: '🌦️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 22, temp_max: 28, humidity: 82, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Tomorrow', temp_min: 21, temp_max: 27, humidity: 85, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 78, description: 'Cloudy', icon: '☁️' },
+                    { date: 'Day 4', temp_min: 24, temp_max: 30, humidity: 75, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 5', temp_min: 25, temp_max: 31, humidity: 72, description: 'Sunny', icon: '☀️' }
+                ]
+            },
+            'alappuzha': {
+                current: {
+                    location: 'Alappuzha, Kerala',
+                    temp: 29,
+                    feels_like: 34,
+                    humidity: 78,
+                    wind_speed: 3.5,
+                    pressure: 1013,
+                    description: 'Sunny',
+                    icon: '☀️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 25, temp_max: 31, humidity: 78, description: 'Sunny', icon: '☀️' },
+                    { date: 'Tomorrow', temp_min: 24, temp_max: 30, humidity: 80, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 85, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 22, temp_max: 28, humidity: 88, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 5', temp_min: 25, temp_max: 31, humidity: 75, description: 'Cloudy', icon: '☁️' }
+                ]
+            },
+            'kottayam': {
+                current: {
+                    location: 'Kottayam, Kerala',
+                    temp: 27,
+                    feels_like: 31,
+                    humidity: 80,
+                    wind_speed: 2.8,
+                    pressure: 1014,
+                    description: 'Cloudy',
+                    icon: '☁️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 23, temp_max: 29, humidity: 80, description: 'Cloudy', icon: '☁️' },
+                    { date: 'Tomorrow', temp_min: 22, temp_max: 28, humidity: 85, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 3', temp_min: 21, temp_max: 27, humidity: 88, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 4', temp_min: 23, temp_max: 29, humidity: 82, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Day 5', temp_min: 25, temp_max: 31, humidity: 75, description: 'Partly Cloudy', icon: '⛅' }
+                ]
+            },
+            'ernakulam': {
+                current: {
+                    location: 'Ernakulam, Kerala',
+                    temp: 28,
+                    feels_like: 32,
+                    humidity: 77,
+                    wind_speed: 3.3,
+                    pressure: 1013,
+                    description: 'Partly Cloudy',
+                    icon: '⛅'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 24, temp_max: 30, humidity: 77, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Tomorrow', temp_min: 25, temp_max: 31, humidity: 75, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 82, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 4', temp_min: 24, temp_max: 30, humidity: 80, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Day 5', temp_min: 26, temp_max: 32, humidity: 70, description: 'Sunny', icon: '☀️' }
+                ]
+            },
+            'idukki': {
+                current: {
+                    location: 'Idukki, Kerala',
+                    temp: 22,
+                    feels_like: 25,
+                    humidity: 85,
+                    wind_speed: 2.0,
+                    pressure: 1018,
+                    description: 'Heavy Rain',
+                    icon: '🌧️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 18, temp_max: 24, humidity: 85, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Tomorrow', temp_min: 17, temp_max: 23, humidity: 88, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Day 3', temp_min: 19, temp_max: 25, humidity: 82, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 20, temp_max: 26, humidity: 78, description: 'Cloudy', icon: '☁️' },
+                    { date: 'Day 5', temp_min: 21, temp_max: 27, humidity: 75, description: 'Partly Cloudy', icon: '⛅' }
+                ]
+            },
+            'thrissur': {
+                current: {
+                    location: 'Thrissur, Kerala',
+                    temp: 28,
+                    feels_like: 33,
+                    humidity: 79,
+                    wind_speed: 3.1,
+                    pressure: 1013,
+                    description: 'Light Rain',
+                    icon: '🌦️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 24, temp_max: 30, humidity: 79, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Tomorrow', temp_min: 23, temp_max: 29, humidity: 83, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 3', temp_min: 25, temp_max: 31, humidity: 76, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 4', temp_min: 26, temp_max: 32, humidity: 72, description: 'Sunny', icon: '☀️' },
+                    { date: 'Day 5', temp_min: 25, temp_max: 31, humidity: 74, description: 'Cloudy', icon: '☁️' }
+                ]
+            },
+            'palakkad': {
+                current: {
+                    location: 'Palakkad, Kerala',
+                    temp: 31,
+                    feels_like: 36,
+                    humidity: 68,
+                    wind_speed: 2.5,
+                    pressure: 1011,
+                    description: 'Sunny',
+                    icon: '☀️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 26, temp_max: 33, humidity: 68, description: 'Sunny', icon: '☀️' },
+                    { date: 'Tomorrow', temp_min: 25, temp_max: 32, humidity: 72, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 3', temp_min: 24, temp_max: 30, humidity: 78, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 23, temp_max: 29, humidity: 82, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 5', temp_min: 25, temp_max: 31, humidity: 75, description: 'Cloudy', icon: '☁️' }
+                ]
+            },
+            'malappuram': {
+                current: {
+                    location: 'Malappuram, Kerala',
+                    temp: 28,
+                    feels_like: 32,
+                    humidity: 81,
+                    wind_speed: 3.4,
+                    pressure: 1014,
+                    description: 'Thunderstorms',
+                    icon: '⛈️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 23, temp_max: 30, humidity: 81, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Tomorrow', temp_min: 22, temp_max: 29, humidity: 85, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 3', temp_min: 24, temp_max: 31, humidity: 78, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 25, temp_max: 32, humidity: 74, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 5', temp_min: 26, temp_max: 33, humidity: 70, description: 'Sunny', icon: '☀️' }
+                ]
+            },
+            'kannur': {
+                current: {
+                    location: 'Kannur, Kerala',
+                    temp: 26,
+                    feels_like: 30,
+                    humidity: 83,
+                    wind_speed: 4.2,
+                    pressure: 1015,
+                    description: 'Heavy Rain',
+                    icon: '🌧️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 22, temp_max: 28, humidity: 83, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Tomorrow', temp_min: 21, temp_max: 27, humidity: 86, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Day 3', temp_min: 23, temp_max: 29, humidity: 80, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 24, temp_max: 30, humidity: 76, description: 'Cloudy', icon: '☁️' },
+                    { date: 'Day 5', temp_min: 25, temp_max: 31, humidity: 73, description: 'Partly Cloudy', icon: '⛅' }
+                ]
+            },
+            'kasaragod': {
+                current: {
+                    location: 'Kasaragod, Kerala',
+                    temp: 27,
+                    feels_like: 31,
+                    humidity: 82,
+                    wind_speed: 3.8,
+                    pressure: 1014,
+                    description: 'Light Rain',
+                    icon: '🌦️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 23, temp_max: 29, humidity: 82, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Tomorrow', temp_min: 22, temp_max: 28, humidity: 85, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 3', temp_min: 24, temp_max: 30, humidity: 78, description: 'Partly Cloudy', icon: '⛅' },
+                    { date: 'Day 4', temp_min: 25, temp_max: 31, humidity: 75, description: 'Sunny', icon: '☀️' },
+                    { date: 'Day 5', temp_min: 24, temp_max: 30, humidity: 77, description: 'Cloudy', icon: '☁️' }
+                ]
+            },
+            'wayanad': {
+                current: {
+                    location: 'Wayanad, Kerala',
+                    temp: 21,
+                    feels_like: 24,
+                    humidity: 88,
+                    wind_speed: 2.2,
+                    pressure: 1019,
+                    description: 'Thunderstorms',
+                    icon: '⛈️'
+                },
+                forecast: [
+                    { date: 'Today', temp_min: 17, temp_max: 23, humidity: 88, description: 'Thunderstorms', icon: '⛈️' },
+                    { date: 'Tomorrow', temp_min: 16, temp_max: 22, humidity: 90, description: 'Heavy Rain', icon: '🌧️' },
+                    { date: 'Day 3', temp_min: 18, temp_max: 24, humidity: 85, description: 'Light Rain', icon: '🌦️' },
+                    { date: 'Day 4', temp_min: 19, temp_max: 25, humidity: 80, description: 'Cloudy', icon: '☁️' },
+                    { date: 'Day 5', temp_min: 20, temp_max: 26, humidity: 75, description: 'Partly Cloudy', icon: '⛅' }
+                ]
+            }
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 1000, once: true });
+            setLanguage('en');
+            
+            // Event listeners
+            searchBtn.addEventListener('click', handleCitySearch);
+            locationBtn.addEventListener('click', handleLocationRequest);
+            cityInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') handleCitySearch();
+            });
+
+            // Load default weather for Kochi
+            loadWeatherData('kochi');
+        });
+
+        function handleCitySearch() {
+            const city = cityInput.value.trim().toLowerCase();
+            if (!city) {
+                showError('Please enter a city name');
+                return;
+            }
+            loadWeatherData(city);
+        }
+
+        function handleLocationRequest() {
+            if (!navigator.geolocation) {
+                showError('Geolocation is not supported by your browser');
+                return;
+            }
+
+            showLoading();
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    // For demo, we'll use Kochi as default location
+                    loadWeatherData('kochi');
+                },
+                (error) => {
+                    showError('Unable to retrieve your location. Please enter a city name.');
+                }
+            );
+        }
+
+        function loadWeatherData(city) {
+            showLoading();
+
+            // Simulate API call delay
+            setTimeout(() => {
+                const weatherData = sampleWeatherData[city.toLowerCase()];
+                
+                if (!weatherData) {
+                    const availableDistricts = Object.keys(sampleWeatherData).map(key => 
+                        sampleWeatherData[key].current.location.split(',')[0]
+                    ).join(', ');
+                    showError(`Weather data not available for "${city}". Available districts: ${availableDistricts}`);
+                    return;
+                }
+
+                displayCurrentWeather(weatherData.current);
+                displayForecast(weatherData.forecast);
+                displayWeatherTips(weatherData.current);
+                hideLoading();
+            }, 1000);
+        }
+
+        function displayCurrentWeather(current) {
+            document.getElementById('currentLocation').textContent = current.location;
+            document.getElementById('currentTemp').textContent = `${current.temp}°C`;
+            document.getElementById('currentDesc').textContent = current.description;
+            document.getElementById('feelsLike').textContent = `${current.feels_like}°C`;
+            document.getElementById('currentHumidity').textContent = `${current.humidity}%`;
+            document.getElementById('currentWind').textContent = `${current.wind_speed} m/s`;
+            document.getElementById('currentPressure').textContent = `${current.pressure} hPa`;
+            document.getElementById('currentIcon').textContent = current.icon;
+
+            currentWeather.classList.remove('hidden');
+        }
+
+        function displayForecast(forecast) {
+            forecastGrid.innerHTML = forecast.map((day, index) => `
+                <div class="weather-card bg-white rounded-lg shadow-md p-6 text-center" data-aos="fade-up" data-aos-delay="${index * 100}">
+                    <div class="text-lg font-semibold text-gray-800 mb-2">${day.date}</div>
+                    <div class="text-4xl mb-2">${day.icon}</div>
+                    <div class="text-2xl font-bold text-gray-900 mb-2">${day.temp_max}°</div>
+                    <div class="text-sm text-gray-600 mb-2">${day.temp_min}°</div>
+                    <div class="text-sm text-gray-700 mb-2">${day.description}</div>
+                    <div class="text-xs text-gray-500">Humidity: ${day.humidity}%</div>
+                </div>
+            `).join('');
+
+            forecastContainer.classList.remove('hidden');
+        }
+
+        function displayWeatherTips(current) {
+            let tips = [];
+
+            if (current.temp > 32) {
+                tips.push("🌡️ High temperature alert: Ensure adequate irrigation for crops. Consider shade nets for sensitive plants.");
+            }
+            
+            if (current.humidity > 80) {
+                tips.push("💧 High humidity: Monitor for fungal diseases. Ensure good air circulation around crops.");
+            }
+            
+            if (current.description.toLowerCase().includes('rain')) {
+                tips.push("🌧️ Rainy conditions: Avoid pesticide application. Check drainage systems. Harvest mature crops if possible.");
+            }
+            
+            if (current.description.toLowerCase().includes('sunny')) {
+                tips.push("☀️ Clear weather: Good time for spraying operations and harvesting. Monitor soil moisture levels.");
+            }
+
+            tips.push("📱 Always check weather updates before planning agricultural activities.");
+
+            weatherTips.innerHTML = tips.map(tip => `<p class="mb-2">${tip}</p>`).join('');
+        }
+
+        function showLoading() {
+            hideStates();
+            loadingState.classList.remove('hidden');
+        }
+
+        function showError(message) {
+            hideStates();
+            errorMessage.textContent = message;
+            errorState.classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            loadingState.classList.add('hidden');
+        }
+
+        function hideStates() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+        }
+
+        // Language functionality
+        const languageSelects = document.querySelectorAll('.language-select');
+        languageSelects.forEach(select => {
+            select.addEventListener('change', function(e) {
+                setLanguage(e.target.value);
+                languageSelects.forEach(s => s.value = e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>

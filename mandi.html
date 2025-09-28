@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kerala Mandi Prices - Krishi Sarthi</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+    <style>
+        .price-card {
+            transition: all 0.3s ease;
+        }
+        .price-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .loading-spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #10b981;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .trend-up {
+            color: #059669;
+        }
+        .trend-down {
+            color: #dc2626;
+        }
+        .trend-stable {
+            color: #6b7280;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-gray-800">
+    <!-- Header -->
+    <!-- Sticky Navbar -->
+    <header class="sticky top-0 z-50 bg-white shadow text-black">
+        <nav class="flex justify-between px-5 py-2 items-center">
+            <!-- Logo + Heading -->
+            <div class="flex items-center space-x-3">
+                <a href="index.html">
+                    <img class="w-5 md:w-16" src="images/logo.png" alt="Logo">
+                </a>
+                <a href="index.html"><h1 class="text-xl md:text-2xl text-green-900 font-bold" data-i18n="title">Krishi Sarthi</h1></a>
+            </div>
+
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-2 font-medium">
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="index.html" data-i18n="home">Home</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="schemes">Schemes</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="market_prices">Market Prices</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="weather">Weather</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#contact" data-i18n="contact">Contact Us</a>
+                <select class="language-select bg-green-500 text-white rounded-lg px-2 py-1 text-sm">
+                    <option value="en">English</option>
+                    <option value="hi">हिन्दी</option>
+                    <option value="ml">മലയാളം</option>
+                    <option value="ta">தமிழ்</option>
+                    <option value="te">తెలుగు</option>
+                    <option value="kn">ಕನ್ನಡ</option>
+                    <option value="bn">বাংলা</option>
+                    <option value="mr">मराठी</option>
+                    <option value="gu">ગુજરાતી</option>
+                    <option value="pa">ਪੰਜਾਬੀ</option>
+                </select>
+            </div>
+
+            <!-- Mobile menu button -->
+            <div class="md:hidden">
+                <button id="menu-btn" class="focus:outline-none">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </nav>
+
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="md:hidden hidden px-5 pb-4">
+            <a href="index.html" class="block py-2 text-green-800" data-i18n="home">Home</a>
+            <a href="#services" class="block py-2 text-green-800" data-i18n="schemes">Schemes</a>
+            <a href="#services" class="block py-2 text-green-800" data-i18n="market_prices">Market Prices</a>
+            <a href="#services" class="block py-2 text-green-800" data-i18n="weather">Weather</a>
+            <a href="#contact" class="block py-2 text-green-800" data-i18n="contact">Contact Us</a>
+            <select class="language-select bg-green-500 text-white rounded-lg px-2 py-1 text-sm">
+                <option value="en">English</option>
+                <option value="hi">हिन्दी</option>
+                <option value="ml">മലയാളം</option>
+                <option value="ta">தமிழ்</option>
+                <option value="te">తెలుగు</option>
+                <option value="kn">ಕನ್ನಡ</option>
+                <option value="bn">বাংলা</option>
+                <option value="mr">मराठी</option>
+                <option value="gu">ગુજરાતી</option>
+                <option value="pa">ਪੰਜਾਬੀ</option>
+            </select>
+        </div>
+    </header>
+
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-green-900 mb-4">Kerala Mandi Prices</h1>
+            <p class="text-lg text-gray-600">Real-time agricultural commodity prices across Kerala markets</p>
+        </div>
+
+        <!-- Controls -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
+            <div class="flex flex-col md:flex-row gap-4">
+                <select id="districtSelect" class="bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700">
+                    <option value="">All Districts</option>
+                    <option value="Thiruvananthapuram">Thiruvananthapuram</option>
+                    <option value="Kollam">Kollam</option>
+                    <option value="Pathanamthitta">Pathanamthitta</option>
+                    <option value="Alappuzha">Alappuzha</option>
+                    <option value="Kottayam">Kottayam</option>
+                    <option value="Ernakulam">Ernakulam</option>
+                    <option value="Idukki">Idukki</option>
+                    <option value="Thrissur">Thrissur</option>
+                    <option value="Palakkad">Palakkad</option>
+                    <option value="Malappuram">Malappuram</option>
+                    <option value="Kozhikode">Kozhikode</option>
+                    <option value="Wayanad">Wayanad</option>
+                    <option value="Kannur">Kannur</option>
+                    <option value="Kasaragod">Kasaragod</option>
+                </select>
+                
+                <select id="commoditySelect" class="bg-white border border-gray-300 rounded-lg px-4 py-2 text-gray-700">
+                    <option value="">All Commodities</option>
+                    <option value="Rice">Rice</option>
+                    <option value="Coconut">Coconut</option>
+                    <option value="Rubber">Rubber</option>
+                    <option value="Pepper">Pepper</option>
+                    <option value="Cardamom">Cardamom</option>
+                    <option value="Ginger">Ginger</option>
+                    <option value="Turmeric">Turmeric</option>
+                    <option value="Banana">Banana</option>
+                    <option value="Tapioca">Tapioca</option>
+                    <option value="Vegetables">Vegetables</option>
+                </select>
+            </div>
+            
+            <button id="refreshBtn" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium flex items-center gap-2">
+                <span>🔄</span> Refresh Prices
+            </button>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="flex justify-center items-center py-12">
+            <div class="loading-spinner"></div>
+            <span class="ml-3 text-gray-600">Loading market prices...</span>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="hidden bg-red-50 border border-red-200 rounded-lg p-6 text-center">
+            <p class="text-red-700 font-medium">Failed to load market prices</p>
+            <p class="text-red-600 text-sm mt-2">Please check your connection and try again</p>
+        </div>
+
+        <!-- Market Prices Grid -->
+        <div id="pricesContainer" class="hidden">
+            <div class="mb-6">
+                <p class="text-sm text-gray-500" id="lastUpdated">Last updated: Loading...</p>
+            </div>
+            
+            <div id="pricesGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Price cards will be dynamically inserted here -->
+            </div>
+        </div>
+
+        <!-- No Data State -->
+        <div id="noDataState" class="hidden text-center py-12">
+            <div class="text-gray-400 text-6xl mb-4">📊</div>
+            <h3 class="text-xl font-medium text-gray-700 mb-2">No market data available</h3>
+            <p class="text-gray-500">Try selecting different filters or check back later</p>
+        </div>
+
+        <!-- Info Section -->
+        <div class="mt-12 bg-blue-50 border border-blue-200 rounded-lg p-6">
+            <h3 class="text-lg font-semibold text-blue-900 mb-3">📋 Market Price Information</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-800">
+                <div>
+                    <p><strong>Price Unit:</strong> Per Quintal (100 kg)</p>
+                    <p><strong>Currency:</strong> Indian Rupees (₹)</p>
+                </div>
+                <div>
+                    <p><strong>Update Frequency:</strong> Daily at 6:00 AM</p>
+                    <p><strong>Source:</strong> Kerala Agricultural Marketing Board</p>
+                </div>
+            </div>
+        </div>
+    </main>
+ 
+    <footer class="w-full flex flex-col sm:flex-row justify-evenly p-6 bg-slate-900 animate-fade-in sm:gap-0" data-aos="fade-down">
+        <div class="p-4">
+            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="footer_home">Home</h2>
+            <ul class="text-white mt-3 mx-2 space-y-1">
+                <li data-i18n="about">About</li>
+                <li data-i18n="contact_us">Contact us</li>
+            </ul>
+        </div>
+        <div class="p-4">
+            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="faqs1">FAQs</h2>
+            <ul class="text-white mt-3 mx-2 space-y-1">
+                <li data-i18n="security">Security</li>
+                <li data-i18n="help">Help</li>
+            </ul>
+        </div>
+        <div class="p-4">
+            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="privacy_policy">Privacy Policy</h2>
+            <ul class="text-white mt-3 mx-2 space-y-1">
+                <li data-i18n="privacy">Privacy</li>
+                <li data-i18n="community">Community</li>
+            </ul>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="translation.js"></script>
+    <script src="contact.js"></script>
+    <script src="chat.js"></script>
+    <script src="schemes.js"></script>
+    <script src="src/js/auth-ui.js"></script>
+    <script>
+
+        // Mobile menu toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Sample Kerala agricultural market data
+        const keralaMarketData = [
+            // Rice varieties
+            { commodity: 'Rice', variety: 'IR 64', district: 'Palakkad', market: 'Ottapalam', minPrice: 2100, maxPrice: 2300, modalPrice: 2200, trend: 'up', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Rice', variety: 'Jyothi', district: 'Thrissur', market: 'Chalakudy', minPrice: 2250, maxPrice: 2450, modalPrice: 2350, trend: 'stable', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Rice', variety: 'White Ponni', district: 'Alappuzha', market: 'Kuttanad', minPrice: 2400, maxPrice: 2600, modalPrice: 2500, trend: 'up', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            
+            // Coconut
+            { commodity: 'Coconut', variety: 'Dehusked', district: 'Ernakulam', market: 'Angamaly', minPrice: 1800, maxPrice: 2200, modalPrice: 2000, trend: 'down', unit: 'Per 1000 pieces', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Coconut', variety: 'With Husk', district: 'Thiruvananthapuram', market: 'Nedumangad', minPrice: 1500, maxPrice: 1800, modalPrice: 1650, trend: 'up', unit: 'Per 1000 pieces', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Coconut', variety: 'Copra', district: 'Kollam', market: 'Punalur', minPrice: 9500, maxPrice: 10500, modalPrice: 10000, trend: 'stable', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            
+            // Rubber
+            { commodity: 'Rubber', variety: 'RSS-4', district: 'Idukki', market: 'Thodupuzha', minPrice: 14500, maxPrice: 15200, modalPrice: 14850, trend: 'up', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Rubber', variety: 'RSS-5', district: 'Kottayam', market: 'Pala', minPrice: 14200, maxPrice: 14800, modalPrice: 14500, trend: 'down', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            
+            // Spices
+            { commodity: 'Pepper', variety: 'Black Pepper', district: 'Wayanad', market: 'Mananthavady', minPrice: 45000, maxPrice: 48000, modalPrice: 46500, trend: 'up', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Cardamom', variety: 'Small', district: 'Idukki', market: 'Kumily', minPrice: 180000, maxPrice: 200000, modalPrice: 190000, trend: 'stable', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Ginger', variety: 'Fresh', district: 'Kozhikode', market: 'Vadakara', minPrice: 3500, maxPrice: 4200, modalPrice: 3850, trend: 'up', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Turmeric', variety: 'Dry', district: 'Ernakulam', market: 'Perumbavoor', minPrice: 8500, maxPrice: 9200, modalPrice: 8850, trend: 'down', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            
+            // Other crops
+            { commodity: 'Banana', variety: 'Robusta', district: 'Thrissur', market: 'Irinjalakuda', minPrice: 800, maxPrice: 1200, modalPrice: 1000, trend: 'stable', unit: 'Per 100 pieces', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Banana', variety: 'Red Banana', district: 'Kannur', market: 'Thalassery', minPrice: 1500, maxPrice: 2000, modalPrice: 1750, trend: 'up', unit: 'Per 100 pieces', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Tapioca', variety: 'Fresh', district: 'Malappuram', market: 'Perinthalmanna', minPrice: 1200, maxPrice: 1500, modalPrice: 1350, trend: 'stable', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            
+            // Vegetables
+            { commodity: 'Vegetables', variety: 'Tomato', district: 'Palakkad', market: 'Mannarkkad', minPrice: 2000, maxPrice: 2800, modalPrice: 2400, trend: 'down', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Vegetables', variety: 'Onion', district: 'Kasaragod', market: 'Kanhangad', minPrice: 1800, maxPrice: 2200, modalPrice: 2000, trend: 'up', unit: 'Quintal', date: new Date().toISOString().split('T')[0] },
+            { commodity: 'Vegetables', variety: 'Potato', district: 'Wayanad', market: 'Sulthan Bathery', minPrice: 2200, maxPrice: 2600, modalPrice: 2400, trend: 'stable', unit: 'Quintal', date: new Date().toISOString().split('T')[0] }
+        ];
+
+        let currentData = [...keralaMarketData];
+
+        // DOM elements
+        const districtSelect = document.getElementById('districtSelect');
+        const commoditySelect = document.getElementById('commoditySelect');
+        const refreshBtn = document.getElementById('refreshBtn');
+        const loadingState = document.getElementById('loadingState');
+        const errorState = document.getElementById('errorState');
+        const pricesContainer = document.getElementById('pricesContainer');
+        const noDataState = document.getElementById('noDataState');
+        const pricesGrid = document.getElementById('pricesGrid');
+        const lastUpdated = document.getElementById('lastUpdated');
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            AOS.init({ duration: 1000, once: true });
+            setLanguage('en');
+            loadPrices();
+            
+            // Event listeners
+            districtSelect.addEventListener('change', filterPrices);
+            commoditySelect.addEventListener('change', filterPrices);
+            refreshBtn.addEventListener('click', refreshPrices);
+        });
+
+        function loadPrices() {
+            showLoading();
+            
+            // Simulate API delay
+            setTimeout(() => {
+                try {
+                    displayPrices(currentData);
+                    hideLoading();
+                    updateLastUpdatedTime();
+                } catch (error) {
+                    showError();
+                    hideLoading();
+                }
+            }, 1000);
+        }
+
+        function filterPrices() {
+            const selectedDistrict = districtSelect.value;
+            const selectedCommodity = commoditySelect.value;
+            
+            let filteredData = [...keralaMarketData];
+            
+            if (selectedDistrict) {
+                filteredData = filteredData.filter(item => item.district === selectedDistrict);
+            }
+            
+            if (selectedCommodity) {
+                filteredData = filteredData.filter(item => item.commodity === selectedCommodity);
+            }
+            
+            currentData = filteredData;
+            displayPrices(currentData);
+        }
+
+        function refreshPrices() {
+            // Add small random variations to simulate price changes
+            keralaMarketData.forEach(item => {
+                const variation = (Math.random() - 0.5) * 200; // ±100 price variation
+                item.modalPrice = Math.max(0, Math.round(item.modalPrice + variation));
+                item.minPrice = Math.max(0, Math.round(item.modalPrice - (Math.random() * 300)));
+                item.maxPrice = Math.max(item.modalPrice, Math.round(item.modalPrice + (Math.random() * 300)));
+                item.trend = ['up', 'down', 'stable'][Math.floor(Math.random() * 3)];
+                item.date = new Date().toISOString().split('T')[0];
+            });
+            
+            filterPrices();
+            updateLastUpdatedTime();
+        }
+
+        function displayPrices(data) {
+            if (data.length === 0) {
+                showNoData();
+                return;
+            }
+            
+            hideStates();
+            pricesContainer.classList.remove('hidden');
+            
+            pricesGrid.innerHTML = data.map(item => `
+                <div class="price-card bg-white rounded-lg shadow-md p-6 border-l-4 border-green-500" data-aos="fade-up">
+                    <div class="flex justify-between items-start mb-4">
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-900">${item.commodity}</h3>
+                            <p class="text-sm text-gray-600">${item.variety}</p>
+                        </div>
+                        <div class="text-right">
+                            <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${getTrendClass(item.trend)}">
+                                ${getTrendIcon(item.trend)} ${item.trend.charAt(0).toUpperCase() + item.trend.slice(1)}
+                            </span>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <div class="text-2xl font-bold text-green-600">₹${item.modalPrice.toLocaleString()}</div>
+                        <div class="text-sm text-gray-500">per ${item.unit}</div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 mb-4 text-sm">
+                        <div>
+                            <span class="text-gray-600">Min:</span>
+                            <span class="font-medium">₹${item.minPrice.toLocaleString()}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Max:</span>
+                            <span class="font-medium">₹${item.maxPrice.toLocaleString()}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="border-t pt-4 text-sm text-gray-600">
+                        <div class="flex justify-between">
+                            <span>📍 ${item.district}</span>
+                            <span>🏪 ${item.market}</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getTrendClass(trend) {
+            switch(trend) {
+                case 'up': return 'bg-green-100 text-green-800';
+                case 'down': return 'bg-red-100 text-red-800';
+                default: return 'bg-gray-100 text-gray-800';
+            }
+        }
+
+        function getTrendIcon(trend) {
+            switch(trend) {
+                case 'up': return '📈';
+                case 'down': return '📉';
+                default: return '➡️';
+            }
+        }
+
+        function showLoading() {
+            hideStates();
+            loadingState.classList.remove('hidden');
+        }
+
+        function showError() {
+            hideStates();
+            errorState.classList.remove('hidden');
+        }
+
+        function showNoData() {
+            hideStates();
+            noDataState.classList.remove('hidden');
+        }
+
+        function hideLoading() {
+            loadingState.classList.add('hidden');
+        }
+
+        function hideStates() {
+            loadingState.classList.add('hidden');
+            errorState.classList.add('hidden');
+            pricesContainer.classList.add('hidden');
+            noDataState.classList.add('hidden');
+        }
+
+        function updateLastUpdatedTime() {
+            const now = new Date();
+            lastUpdated.textContent = `Last updated: ${now.toLocaleDateString()} at ${now.toLocaleTimeString()}`;
+        }
+
+        // Language functionality (simplified for demo)
+        const languageSelects = document.querySelectorAll('.language-select');
+        languageSelects.forEach(select => {
+            select.addEventListener('change', function(e) {
+                setLanguage(e.target.value);
+                languageSelects.forEach(s => s.value = e.target.value);
+            });
+        });
+    </script>
+</body>
+</html>
