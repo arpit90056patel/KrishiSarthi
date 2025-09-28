@@ -1,4 +1,5 @@
 // chat.js - Frontend calls backend proxy
+
 let uploadedImage = null; // Store uploaded image file
 let chatHistory = []; // UI history (backend handles session)
 let isRecording = false; // Track recording state
@@ -37,57 +38,7 @@ function addMessage(content, isUser = false, imageUrl = null) {
   });
 }
 
-// Send message to backend proxy
-async function sendMessage() {
-  const input = document.getElementById('userInput');
-  const prompt = input.value.trim();
-  
-  // You can keep the prompt requirement if you want, or remove it to allow image-only queries
-  if (!prompt && !uploadedImage) {
-    addMessage('Please enter a message or upload an image.');
-    return;
-  }
-
-  const langSelect = document.getElementById('chatLanguageSelect').value;
-
-  // Add user message to UI
-  const previewUrl = uploadedImage ? URL.createObjectURL(uploadedImage) : null;
-  addMessage(prompt || 'Analyzing image...', true, previewUrl);
-  input.value = '';
-
-  try {
-    let imageBase64 = null;
-    let mimeType = null;
-
-    if (uploadedImage) {
-      // Check image size before reading
-      if (uploadedImage.size > 20 * 1024 * 1024) {
-        addMessage('Image is too large (max 20MB). Please upload a smaller image.');
-        uploadedImage = null; // Clear the invalid image
-        document.getElementById('imagePreview').classList.add('hidden');
-        return;
-      }
-      
-      // Await the result of the file reading
-      const fileData = await fileToBase64(uploadedImage);
-      imageBase64 = fileData.split(',')[1]; // Get Base64 string without the prefix
-      mimeType = uploadedImage.type;
-    }
-    
-    // Now, send to the backend after all data is prepared
-    await sendToBackend(prompt, langSelect, imageBase64, mimeType);
-
-    // Clear uploaded image after sending
-    uploadedImage = null;
-    document.getElementById('imagePreview').classList.add('hidden');
-
-  } catch (error) {
-    console.error('Error in sendMessage:', error);
-    addMessage('Error processing request. Please check your internet or try again.');
-  }
-}
-
-// HELPER FUNCTION: Add this new function anywhere in chat.js
+// Helper function: Convert image file to Base64
 function fileToBase64(file) {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -97,12 +48,58 @@ function fileToBase64(file) {
   });
 }
 
+// Send message to backend
+async function sendMessage() {
+  const input = document.getElementById('userInput');
+  const prompt = input.value.trim();
+  
+  if (!prompt && !uploadedImage) {
+    addMessage('Please enter a message or upload an image.');
+    return;
+  }
+
+  const langSelect = document.getElementById('chatLanguageSelect').value;
+
+  // Show user message
+  const previewUrl = uploadedImage ? URL.createObjectURL(uploadedImage) : null;
+  addMessage(prompt || 'Analyzing image...', true, previewUrl);
+  input.value = '';
+
+  try {
+    let imageBase64 = null;
+    let mimeType = null;
+
+    if (uploadedImage) {
+      if (uploadedImage.size > 20 * 1024 * 1024) {
+        addMessage('Image is too large (max 20MB). Please upload a smaller image.');
+        uploadedImage = null;
+        document.getElementById('imagePreview').classList.add('hidden');
+        return;
+      }
+      const fileData = await fileToBase64(uploadedImage);
+      imageBase64 = fileData.split(',')[1];
+      mimeType = uploadedImage.type;
+    }
+    
+    await sendToBackend(prompt, langSelect, imageBase64, mimeType);
+
+    // Clear uploaded image
+    uploadedImage = null;
+    document.getElementById('imagePreview').classList.add('hidden');
+
+  } catch (error) {
+    console.error('Error in sendMessage:', error);
+    addMessage('Error processing request. Please check your internet or try again.');
+  }
+}
+
+// Send data to backend
 async function sendToBackend(prompt, language, imageBase64 = null, mimeType = null) {
   try {
-    const response = await fetch('http://localhost:3000/api/chat', {
+    const response = await fetch('https://krishisarthi.onrender.com/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt, language, imageBase64, mimeType, tts: true }) // Request TTS audio if using third-party backend TTS
+      body: JSON.stringify({ prompt, language, imageBase64, mimeType, tts: true })
     });
 
     if (!response.ok) {
@@ -114,7 +111,9 @@ async function sendToBackend(prompt, language, imageBase64 = null, mimeType = nu
       addMessage(data.error);
       return;
     }
+
     addMessage(data.response);
+
     if (data.audioUrl) {
       const audio = new Audio(data.audioUrl);
       audio.play().catch(err => {
@@ -122,22 +121,22 @@ async function sendToBackend(prompt, language, imageBase64 = null, mimeType = nu
         addMessage('Failed to play audio response.');
       });
     }
+
   } catch (error) {
     console.error('Fetch Error:', error);
-    addMessage('Failed to connect to server. Ensure the backend is running at http://localhost:3000 and try again.');
+    addMessage('Failed to connect to server.');
   }
 }
 
-// Image upload handler
+// Image upload
 document.getElementById('imageUpload').addEventListener('change', (e) => {
   const file = e.target.files[0];
-  // Expanded list of valid image types from your server.js
   const validImageTypes = ['image/png', 'image/jpeg', 'image/webp', 'image/heic', 'image/heif'];
 
   if (file && validImageTypes.includes(file.type)) {
     if (file.size > 20 * 1024 * 1024) {
       addMessage('Image is too large (max 20MB). Please upload a smaller image.');
-      e.target.value = ''; // Clear the file input
+      e.target.value = '';
       return;
     }
     uploadedImage = file;
@@ -146,7 +145,7 @@ document.getElementById('imageUpload').addEventListener('change', (e) => {
     document.getElementById('imagePreview').classList.remove('hidden');
   } else {
     addMessage('Please upload a valid image (PNG, JPEG, WebP, HEIC, HEIF).');
-    e.target.value = ''; // Clear the file input
+    e.target.value = '';
   }
 });
 
@@ -156,148 +155,100 @@ document.getElementById('userInput').addEventListener('keypress', (e) => {
   if (e.key === 'Enter') sendMessage();
 });
 
-// Voice button: Speech-to-Text
+// Voice input
 document.getElementById('voiceBtn').addEventListener('click', () => {
-  // Check secure context (http:// or https://)
   if (window.location.protocol === 'file:') {
-    addMessage('Speech recognition requires a web server (http:// or https://). Please serve the site using "python -m http.server" or a similar server.');
+    addMessage('Speech recognition requires a local server (http:// or https://).');
     return;
   }
 
   if (!('webkitSpeechRecognition' in window)) {
-    addMessage('Speech recognition is not supported in this browser. Please use Chrome or Edge.');
+    addMessage('Speech recognition is not supported in this browser.');
     return;
   }
 
   const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
   const langSelect = document.getElementById('chatLanguageSelect').value;
-  recognition.lang = langSelect === 'hi' ? 'hi-IN'
-      : langSelect === 'ml' ? 'ml-IN'
-      : langSelect === 'ta' ? 'ta-IN'
-      : langSelect === 'te' ? 'te-IN'
-      : langSelect === 'kn' ? 'kn-IN'
-      : langSelect === 'bn' ? 'bn-IN'
-      : langSelect === 'mr' ? 'mr-IN'
-      : langSelect === 'gu' ? 'gu-IN'
-      : langSelect === 'pa' ? 'pa-IN'
-      : 'en-IN';
+  recognition.lang = {
+    hi: 'hi-IN', ml: 'ml-IN', ta: 'ta-IN', te: 'te-IN',
+    kn: 'kn-IN', bn: 'bn-IN', mr: 'mr-IN', gu: 'gu-IN',
+    pa: 'pa-IN', en: 'en-IN'
+  }[langSelect] || 'en-IN';
 
-  const voiceBtn = document.getElementById('voiceBtn');
   recognition.onstart = () => {
     isRecording = true;
-    voiceBtn.classList.add('recording');
+    document.getElementById('voiceBtn').classList.add('recording');
     addMessage('Listening... Speak clearly.');
   };
 
   recognition.onresult = (event) => {
-  const transcript = event.results[0][0].transcript;
-  document.getElementById('userInput').value = transcript;
-  addMessage('Voice input received: ' + transcript);
-
-  // Optional: Auto-send after a short delay (2 seconds) to allow review
-  setTimeout(() => {
-    if (confirm('Send voice query now?')) {  // Or remove confirm for instant send
-      sendMessage();
-    }
-  }, 2000);
-};
+    const transcript = event.results[0][0].transcript;
+    document.getElementById('userInput').value = transcript;
+    addMessage('Voice input received: ' + transcript);
+    setTimeout(() => {
+      if (confirm('Send voice query now?')) sendMessage();
+    }, 2000);
+  };
 
   recognition.onerror = (event) => {
     console.error('Speech recognition error:', event.error);
-    addMessage('Speech recognition failed: ' + event.error + '. Please ensure microphone access and try again.');
+    addMessage('Speech recognition failed: ' + event.error);
   };
 
   recognition.onend = () => {
     isRecording = false;
-    voiceBtn.classList.remove('recording');
+    document.getElementById('voiceBtn').classList.remove('recording');
     addMessage('Speech recognition stopped.');
   };
 
-  // Request microphone permission
   navigator.mediaDevices.getUserMedia({ audio: true })
     .then(() => recognition.start())
-    .catch((err) => {
+    .catch(err => {
       console.error('Microphone access error:', err);
-      addMessage('Microphone access denied. Please allow microphone permissions in your browser settings (check the padlock icon in the address bar).');
+      addMessage('Microphone access denied.');
     });
 });
 
-// Helper function to get available voices
-function listAvailableVoices() {
-  return new Promise((resolve) => {
-    let voices = window.speechSynthesis.getVoices();
-    if (voices.length > 0) {
-      resolve(voices);
-    } else {
-      window.speechSynthesis.onvoiceschanged = () => {
-        voices = window.speechSynthesis.getVoices();
-        resolve(voices);
-      };
-    }
-  });
-}
-
-// Updated speakResponse function
+// Text-to-speech
 async function speakResponse(text) {
   if (!('speechSynthesis' in window)) {
-    addMessage('Text-to-speech is not supported in this browser.');
+    addMessage('Text-to-speech not supported.');
     return;
   }
 
-  const voices = await listAvailableVoices();
-  console.log('Available voices:', voices.map(v => ({ name: v.name, lang: v.lang })));
-
-  const utterance = new SpeechSynthesisUtterance(text);
+  const voices = window.speechSynthesis.getVoices();
   const langSelect = document.getElementById('chatLanguageSelect').value;
   const langMap = {
-    'hi': 'hi-IN',
-    'ml': 'ml-IN',
-    'ta': 'ta-IN',
-    'te': 'te-IN',
-    'kn': 'kn-IN',
-    'bn': 'bn-IN',
-    'mr': 'mr-IN',
-    'gu': 'gu-IN',
-    'pa': 'pa-IN',
-    'en': 'en-IN'
+    hi: 'hi-IN', ml: 'ml-IN', ta: 'ta-IN', te: 'te-IN',
+    kn: 'kn-IN', bn: 'bn-IN', mr: 'mr-IN', gu: 'gu-IN',
+    pa: 'pa-IN', en: 'en-IN'
   };
   const targetLang = langMap[langSelect] || 'en-IN';
+  const utterance = new SpeechSynthesisUtterance(text);
 
-  const matchingVoice = voices.find(voice => voice.lang === targetLang);
-  if (matchingVoice) {
-    utterance.voice = matchingVoice;
-    utterance.lang = targetLang;
-  } else {
-    const englishVoice = voices.find(voice => voice.lang.includes('en'));
-    if (englishVoice) {
-      utterance.voice = englishVoice;
-      utterance.lang = 'en-US';
-      addMessage(`Text-to-speech is not available for ${targetLang}. Falling back to English.`);
-    } else {
-      addMessage(`No voices available for ${targetLang} or English. Please install a compatible voice or try a different browser.`);
-      return;
-    }
-  }
+  const matchingVoice = voices.find(v => v.lang === targetLang) || voices.find(v => v.lang.includes('en'));
+  if (matchingVoice) utterance.voice = matchingVoice;
 
   utterance.rate = 0.9;
   try {
     window.speechSynthesis.speak(utterance);
   } catch (error) {
     console.error('TTS Error:', error);
-    addMessage('Failed to play text-to-speech. Please try again or check browser settings.');
+    addMessage('Failed to play text-to-speech.');
   }
 }
 
-// Initialize on load
+// Initialize on page load
 document.addEventListener('DOMContentLoaded', () => {
   console.log('Chat initialized');
   document.getElementById('userInput').focus();
+
   // Check backend health
-  fetch('http://localhost:3000/api/health')
+  fetch('https://krishisarthi.onrender.com/api/health')
     .then(res => res.json())
     .then(data => console.log('Backend status:', data))
     .catch(err => {
       console.error('Backend health check failed:', err);
-      addMessage('Warning: Backend server is not responding. Start it with "node server.js" in the backend folder.');
+      addMessage('Warning: Backend server is not responding.');
     });
 });
