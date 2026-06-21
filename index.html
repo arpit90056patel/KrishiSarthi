@@ -94,7 +94,7 @@
                 <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="index.html" data-i18n="home">Home</a>
                 <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="schemes">Schemes</a>
                 <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="market_prices">Market Prices</a>
-                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#services" data-i18n="weather">Weather</a>
+                <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="weather.html" data-i18n="weather">Weather</a>
                 <a class="text-green-800 hover:bg-slate-200 rounded-md px-2 py-1" href="#contact" data-i18n="contact">Contact Us</a>
                 <select class="language-select bg-green-500 text-white rounded-lg px-2 py-1 text-sm">
                     <option value="en">English</option>
@@ -125,7 +125,7 @@
             <a href="index.html" class="block py-2 text-green-800" data-i18n="home">Home</a>
             <a href="#services" class="block py-2 text-green-800" data-i18n="schemes">Schemes</a>
             <a href="#services" class="block py-2 text-green-800" data-i18n="market_prices">Market Prices</a>
-            <a href="#services" class="block py-2 text-green-800" data-i18n="weather">Weather</a>
+            <a href="weather.html" class="block py-2 text-green-800" data-i18n="weather">Weather</a>
             <a href="#contact" class="block py-2 text-green-800" data-i18n="contact">Contact Us</a>
             <select class="language-select bg-green-500 text-white rounded-lg px-2 py-1 text-sm">
                 <option value="en">English</option>
@@ -150,7 +150,7 @@
             <h1 class="text-2xl py-2 sm:text-5xl font-extrabold mx-4 sm:mx-20 text-white" data-i18n="hero_title2">Digital Krishi Officer</h1>
             <p class="mt-6 sm:mt-12 mx-2 sm:mx-12 text-white text-base sm:text-lg" data-i18n="hero_sub">— always available, always learning, and always farmer-first.</p>
             <div class="text-center mt-10 sm:mt-24 mb-10">
-                <a href="#"><button class="font-semibold bg-red-500 border-red-700 rounded-full px-7 py-1.5 text-white hover:bg-red-700" data-i18n="explore">≫ Explore Now</button></a>
+                <a href="#assist"><button class="font-semibold bg-red-500 border-red-700 rounded-full px-7 py-1.5 text-white hover:bg-red-700" data-i18n="explore" >≫ Explore Now</button></a>
             </div>
         </div>
     </section>
@@ -160,7 +160,7 @@
         <h2 class="text-2xl sm:text-3xl text-green-900 font-bold text-center mb-10" data-i18n="services">Services</h2>
         <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6">
             <div id="schemes-trigger" class="service-card flex flex-col items-center bg-white rounded-xl shadow p-4 sm:p-6 hover:shadow-lg transition cursor-pointer">
-                <img src="https://tse4.mm.bing.net/th/id/OIP.dMZwCs6jGx4ZtYYQkSKpoAHaHa?r=0&rs=1&pid=ImgDetMain&o=7&rm=3" alt="Govt Schemes" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-4">
+                <img src="https://cdn.iconscout.com/icon/free/png-256/free-government-scheme-icon-svg-download-png-1522797.png" alt="Govt Schemes" class="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20 object-contain mb-4">
                 <div class="text-center">
                     <h3 class="text-base sm:text-lg md:text-xl font-semibold text-gray-900" data-i18n="govt_schemes">Govt Schemes</h3>
                     <p class="text-gray-600 text-sm sm:text-base mt-2" data-i18n="govt_desc">Stay updated on latest farmer welfare programs.</p>
@@ -238,7 +238,7 @@
 
     <!-- AI Assistant Section -->
     <section id="assistant" class="bg-slate-300 flex flex-col items-center justify-center min-h-screen px-4 pb-20" data-aos="fade-up">
-        <h1 class="text-2xl sm:text-3xl text-green-900 font-bold text-center mb-10 mt-10" data-i18n="ai_title">Your AI Digital Krishi Officer</h1>
+        <h1 class="text-2xl sm:text-3xl text-green-900 font-bold text-center mb-10 mt-10" data-i18n="ai_title" id="assist">Your AI Digital Krishi Officer</h1>
         <div class="w-full max-w-3xl bg-white rounded-xl shadow-lg flex flex-col h-[90vh] border border-gray-200">
             <div class="flex items-center justify-between bg-green-600 text-white px-4 py-3 rounded-t-xl">
                 <div class="flex items-center gap-2">
@@ -265,7 +265,7 @@
                 <div class="flex items-start gap-2">
                     <span class="text-2xl">🤖</span>
                     <div class="bg-gray-200 text-gray-800 px-4 py-2 rounded-2xl max-w-xs" data-i18n="ai_hello">
-                        Hello! I'm your Agricultural AI Assistant. I specialize in Kerala farming - coconut, rubber, spices, rice, and traditional Kerala agricultural practices. Ask about crops, diseases, monsoon farming, or upload crop images for analysis.
+                        Hello! I'm your Agricultural AI Assistant.
                     </div>
                 </div>
             </div>
@@ -282,7 +282,7 @@
                     style="color: #1f2937; background-color: #ffffff;" data-i18n-placeholder="type_message">
                 <button id="voiceBtn" class="bg-green-500 text-white rounded-full p-3 text-xl">🎤</button>
                 <button id="sendBtn" class="bg-green-600 text-white rounded-full p-3 text-xl">➤</button>
-            </div>
+            </div>~
         </div>
     </section>
 
@@ -404,10 +404,10 @@
     <!-- Footer -->
     <footer class="w-full flex flex-col sm:flex-row justify-evenly p-6 bg-slate-900 animate-fade-in sm:gap-0" >
         <div class="p-4">
-            <h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="footer_home">Home</h2>
+            <a href="index.html"><h2 class="text-lg sm:text-xl text-green-500 font-extrabold mb-2" data-i18n="footer_home">Home</h2></a>
             <ul class="text-white mt-3 mx-2 space-y-1">
                 <li data-i18n="about">About</li>
-                <li data-i18n="contact_us">Contact us</li>
+                <a href="#contact"><li data-i18n="contact_us">Contact us</li></a>
             </ul>
         </div>
         <div class="p-4">
@@ -425,7 +425,7 @@
             </ul>
         </div>
     </footer>
-    <p class="bg-slate-900 py-5 px-5">© 2025 KrishiSarthi. All rights reserved.</p>
+    <center><p class="bg-slate-900 pb-4">© 2025 KrishiSarthi. All rights reserved.</p></center>
 
 
     <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
@@ -435,12 +435,12 @@
     <script src="schemes.js"></script>
     <script src="src/js/auth-ui.js"></script>
     <script>
-        // Disable browser scroll restoration
+        // // Disable browser scroll restoration
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
 
-        // Force scroll to top on page load
+        // // Force scroll to top on page load
         window.onload = () => {
             window.scrollTo(0, 0);
             if (window.location.hash) {

@@ -97,20 +97,119 @@ const contacts = {
         ]
     },
     'Bihar': {
+        'Araria': [
+            { name: 'Sri Gaurav Pratap Singh', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031647135', email: 'dao-ara-bih@gov.in', address: 'District Agriculture Office, Araria, Bihar, PIN: 854318' }
+        ],
+        'Arwal': [
+            { name: 'Smt. Sushmita', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643598', email: 'dao-arw-bih@gov.in', address: 'District Agriculture Office, Arwal, Bihar, PIN: 804401' }
+        ],
         'Aurangabad': [
-            { name: 'Vikram Singh', designation: 'District Agriculture Officer', phone: '+91-9471007201', email: 'vikram.singh@agri.bihar.gov.in', address: 'District Agriculture Office, Aurangabad, Bihar, PIN: 824101' }
+            { name: 'Sri Ram Ishwar Prasad', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643753', email: 'dao-aur-bih@gov.in', address: 'District Agriculture Office, Aurangabad, Bihar, PIN: 824101' }
+        ],
+        'Banka': [
+            { name: 'Sri Deepak Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031647360', email: 'dao-ban-bih@gov.in', address: 'District Agriculture Office, Banka, Bihar, PIN: 813102' }
+        ],
+        'Begusarai': [
+            { name: 'Sri Ajit Kumar Yadav', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644139', email: 'dao-beg-bih@gov.in', address: 'District Agriculture Office, Begusarai, Bihar, PIN: 851101' }
         ],
         'Bhagalpur': [
-            { name: 'Neha Kumari', designation: 'District Agriculture Officer', phone: '+91-9471007202', email: 'neha.kumari@agri.bihar.gov.in', address: 'District Agriculture Office, Bhagalpur, Bihar, PIN: 812001' }
+            { name: 'Sri Prem Shankar Prasad', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031647301', email: 'dao-bha-bih@gov.in', address: 'District Agriculture Office, Bhagalpur, Bihar, PIN: 812001' }
+        ],
+        'Bhojpur': [
+            { name: 'Sri Shatrughan Sahu', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644280', email: 'dao-bho-bih@gov.in', address: 'District Agriculture Office, Bhojpur, Bihar, PIN: 802301' }
+        ],
+        'Buxar': [
+            { name: 'Sri Avinash Shankar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644281', email: 'dao-bux-bih@gov.in', address: 'District Agriculture Office, Buxar, Bihar, PIN: 802101' }
+        ],
+        'Darbhanga': [
+            { name: 'Dr. Siddharth', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031646441', email: 'dao-dar-bih@gov.in', address: 'District Agriculture Office, Darbhanga, Bihar, PIN: 846004' }
+        ],
+        'East Champaran': [
+            { name: 'Sri Manish Kumar Singh', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645056', email: 'dao-mot-bih@gov.in', address: 'District Agriculture Office, Motihari, East Champaran, Bihar, PIN: 845401' }
         ],
         'Gaya': [
-            { name: 'Rajesh Kumar', designation: 'District Agriculture Officer', phone: '+91-9471007203', email: 'rajesh.kumar@agri.bihar.gov.in', address: 'District Agriculture Office, Gaya, Bihar, PIN: 823001' }
+            { name: 'Sri Ajay Kumar Singh', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643404', email: 'dao-gay-bih@gov.in', address: 'District Agriculture Office, Gaya, Bihar, PIN: 823001' }
+        ],
+        'Gopalganj': [
+            { name: 'Sri Lalan Kumar Suman', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645874', email: 'dao-gop-bih@gov.in', address: 'District Agriculture Office, Gopalganj, Bihar, PIN: 841428' }
+        ],
+        'Jamui': [
+            { name: 'Sri Brajesh Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644026', email: 'dao-jam-bih@gov.in', address: 'District Agriculture Office, Jamui, Bihar, PIN: 811307' }
+        ],
+        'Jehanabad': [
+            { name: 'Smt. Shambhavna', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643549', email: 'dao-jeh-bih@gov.in', address: 'District Agriculture Office, Jehanabad, Bihar, PIN: 804407' }
+        ],
+        'Kaimur': [
+            { name: 'Sri Revati Raman', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9431818734', email: 'dao-kai-bih@gov.in', address: 'District Agriculture Office, Bhabua, Kaimur, Bihar, PIN: 821101' }
+        ],
+        'Katihar': [
+            { name: 'Sri Mithilesh Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031647061', email: 'dao-kat-bih@gov.in', address: 'District Agriculture Office, Katihar, Bihar, PIN: 854105' }
+        ],
+        'Khagaria': [
+            { name: 'Sri Avinash Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643921', email: 'dao-kha-bih@gov.in', address: 'District Agriculture Office, Khagaria, Bihar, PIN: 851204' }
+        ],
+        'Kishanganj': [
+            { name: 'Sri Shantanu Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031647211', email: '', address: 'District Agriculture Office, Kishanganj, Bihar, PIN: 855107' }
+        ],
+        'Lakhisarai': [
+            { name: 'Sri Subodh Kumar Sudhanshu', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643983', email: 'dao-lak-bih@gov.in', address: 'District Agriculture Office, Lakhisarai, Bihar, PIN: 811311' }
+        ],
+        'Madhepura': [
+            { name: 'Sri Ritesh Ranjan', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643127', email: 'dao-mad-bih@gov.in', address: 'District Agriculture Office, Madhepura, Bihar, PIN: 852113' }
+        ],
+        'Madhubani': [
+            { name: 'Sri Lalan Kumar Chaudhary', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031646443', email: 'dao-mab-bih@gov.in', address: 'District Agriculture Office, Madhubani, Bihar, PIN: 847211' }
+        ],
+        'Munger': [
+            { name: 'Sri Braj Kishore', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643900', email: 'dao-mun-bih@gov.in', address: 'District Agriculture Office, Munger, Bihar, PIN: 811201' }
         ],
         'Muzaffarpur': [
-            { name: 'Anita Verma', designation: 'District Agriculture Officer', phone: '+91-9471007204', email: 'anita.verma@agri.bihar.gov.in', address: 'District Agriculture Office, Muzaffarpur, Bihar, PIN: 842001' }
+            { name: 'Sri Sudhir Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645052', email: 'dao-muz-bih@gov.in', address: 'District Agriculture Office, Muzaffarpur, Bihar, PIN: 842001' }
+        ],
+        'Nalanda': [
+            { name: 'Sri Rajiv Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644279', email: 'dao-nal-bih@gov.in', address: 'District Agriculture Office, Nalanda, Bihar, PIN: 803101' }
+        ],
+        'Nawada': [
+            { name: 'Sri Santosh Kumar Suman', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643650', email: 'dao-naw-bih@gov.in', address: 'District Agriculture Office, Nawada, Bihar, PIN: 805110' }
         ],
         'Patna': [
-            { name: 'Sanjay Yadav', designation: 'District Agriculture Officer', phone: '+91-9471007205', email: 'sanjay.yadav@agri.bihar.gov.in', address: 'District Agriculture Office, Patna, Bihar, PIN: 800001' }
+            { name: 'Sri Praveen Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644278', email: 'dao-pat-bih@gov.in', address: 'District Agriculture Office, Patna, Bihar, PIN: 800001' }
+        ],
+        'Purnia': [
+            { name: 'Sri Haridwar Prasad Chaurasia', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031646959', email: 'dao-pur-bih@gov.in', address: 'District Agriculture Office, Purnia, Bihar, PIN: 854301' }
+        ],
+        'Rohtas': [
+            { name: 'Sri Ram Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644282', email: 'dao-roh-bih@gov.in', address: 'Joint Agriculture Building, Fazalganj, Sasaram, Rohtas, Bihar, PIN: 821115' }
+        ],
+        'Saharsa': [
+            { name: 'Sri Gyan Chandra Sharma', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643345', email: 'dao-sah-bih@gov.in', address: 'District Agriculture Office, Saharsa, Bihar, PIN: 852201' }
+        ],
+        'Samastipur': [
+            { name: 'Sri Dinkar Prasad Singh', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031646450', email: 'dao-sam-bih@gov.in', address: 'District Agriculture Office, Samastipur, Bihar, PIN: 848101' }
+        ],
+        'Saran': [
+            { name: 'Sri Shyam Bihari Singh', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645872', email: 'dao-cha-bih@gov.in', address: 'District Agriculture Office, Chhapra, Saran, Bihar, PIN: 841301' }
+        ],
+        'Sheikhpura': [
+            { name: 'Smt. Sujata Kumari', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031644101', email: 'dao-she-bih@gov.in', address: 'District Agriculture Office, Sheikhpura, Bihar, PIN: 811105' }
+        ],
+        'Sheohar': [
+            { name: 'Sri Ritesh Ranjan', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645055', email: 'dao-sho-bih@gov.in', address: 'District Agriculture Office, Sheohar, Bihar, PIN: 843329' }
+        ],
+        'Sitamarhi': [
+            { name: 'Sri Brajesh Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645054', email: 'dao-sit-bih@gov.in', address: 'District Agriculture Office, Sitamarhi, Bihar, PIN: 843302' }
+        ],
+        'Siwan': [
+            { name: 'Sri Alok Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645873', email: 'dao-siw-bih@gov.in', address: 'District Agriculture Office, Siwan, Bihar, PIN: 841226' }
+        ],
+        'Supaul': [
+            { name: 'Sri Pappu Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031643200', email: 'dao-sup-bih@gov.in', address: 'District Agriculture Office, Supaul, Bihar, PIN: 852131' }
+        ],
+        'Vaishali': [
+            { name: 'Sri Sanjay Kumar', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645053', email: 'dao-vai-bih@gov.in', address: 'District Agriculture Office, Hajipur, Vaishali, Bihar, PIN: 844101' }
+        ],
+        'West Champaran': [
+            { name: 'Sri Praveen Kumar Rai', designation: 'District Agriculture Officer', phone: '', mobile: '+91-9031645057', email: 'dao-bet-bih@gov.in', address: 'District Agriculture Office, Bettiah, West Champaran, Bihar, PIN: 845438' }
         ]
     },
     'Chhattisgarh': {
@@ -507,21 +606,234 @@ const contacts = {
     },
     'Uttar Pradesh': {
         'Agra': [
-            { name: 'Rahul Singh', designation: 'District Agriculture Officer', phone: '+91-9454412777', email: 'rahul.singh@agri.up.gov.in', address: 'District Agriculture Office, Agra, Uttar Pradesh, PIN: 282001' }
-        ],
-        'Varanasi': [
-            { name: 'Suresh Yadav', designation: 'District Agriculture Officer', phone: '+91-9454412780', email: 'suresh.yadav@agri.up.gov.in', address: 'District Agriculture Office, Varanasi, Uttar Pradesh, PIN: 221001' }
-        ],
-        'Lucknow': [
-            { name: 'Anita Sharma', designation: 'District Agriculture Officer', phone: '+91-9454412781', email: 'anita.sharma@agri.up.gov.in', address: 'District Agriculture Office, Lucknow, Uttar Pradesh, PIN: 226001' }
-        ],
+        { name: 'Dr. Rajesh Kumar', designation: 'District Agriculture Officer', phone: '+91-0562-2523141', mobile: '+91-9452245801', email: 'dao.agra@up.gov.in', address: 'Jila Krishi Adhikari Karyalaya, Collectorate Campus, Agra, Uttar Pradesh, PIN: 282001' }
+    ],
+        'Aligarh': [
+        { name: 'Shiv Kumar Singh', designation: 'District Agriculture Officer', phone: '+91-0571-2400201', mobile: '+91-9452245802', email: 'dao.aligarh@up.gov.in', address: 'Krishi Bhawan, Aligarh, Uttar Pradesh, PIN: 202001' }
+    ],
+        'Ambedkar Nagar': [
+        { name: 'Ram Narayan Yadav', designation: 'District Agriculture Officer', phone: '+91-05271-265401', mobile: '+91-9452245804', email: 'dao.ambedkarnagar@up.gov.in', address: 'District Agriculture Office, Akbarpur, Ambedkar Nagar, Uttar Pradesh, PIN: 224122' }
+    ],
+        'Amethi': [
+        { name: 'Arvind Kumar', designation: 'District Agriculture Officer', phone: '+91-05368-244001', mobile: '+91-9452245810', email: 'dao.amethi@up.gov.in', address: 'Collectorate Parisar, Gauriganj, Amethi, Uttar Pradesh, PIN: 227405' }
+    ],
+        'Amroha': [
+        { name: 'Manoj Kumar', designation: 'District Agriculture Officer', phone: '+91-05922-240001', mobile: '+91-9452245803', email: 'dao.amroha@up.gov.in', address: 'Krishi Bhawan, Amroha, Uttar Pradesh, PIN: 244221' }
+    ],
+        'Auraiya': [
+        { name: 'Rajendra Prasad', designation: 'District Agriculture Officer', phone: '+91-05682-252001', mobile: '+91-9452245805', email: 'dao.auraiya@up.gov.in', address: 'Collectorate Campus, Auraiya, Uttar Pradesh, PIN: 206122' }
+    ],
+        'Ayodhya': [
+        { name: 'Dr. R.K. Singh', designation: 'District Agriculture Officer', phone: '+91-05278-223001', mobile: '+91-9452245806', email: 'dao.ayodhya@up.gov.in', address: 'Krishi Bhawan, Ayodhya, Uttar Pradesh, PIN: 224001' }
+    ],
+        'Azamgarh': [
+        { name: 'Satyendra Kumar', designation: 'District Agriculture Officer', phone: '+91-05412-220001', mobile: '+91-9452245807', email: 'dao.azamgarh@up.gov.in', address: 'Collectorate Parisar, Azamgarh, Uttar Pradesh, PIN: 276001' }
+    ],
+        'Baghpat': [
+        { name: 'Virendra Singh', designation: 'District Agriculture Officer', phone: '+91-01277-240001', mobile: '+91-9452245808', email: 'dao.baghpat@up.gov.in', address: 'Krishi Bhawan, Baghpat, Uttar Pradesh, PIN: 250609' }
+    ],
+        'Bahraich': [
+        { name: 'Ashok Kumar', designation: 'District Agriculture Officer', phone: '+91-05252-232001', mobile: '+91-9452245809', email: 'dao.bahraich@up.gov.in', address: 'Collectorate Campus, Bahraich, Uttar Pradesh, PIN: 271801' }
+    ],
+        'Ballia': [
+        { name: 'Ramesh Chandra', designation: 'District Agriculture Officer', phone: '+91-05498-220001', mobile: '+91-9452245811', email: 'dao.ballia@up.gov.in', address: 'Krishi Bhawan, Ballia, Uttar Pradesh, PIN: 277001' }
+    ],
+        'Balrampur': [
+        { name: 'Santosh Kumar', designation: 'District Agriculture Officer', phone: '+91-05253-233001', mobile: '+91-9452245812', email: 'dao.balrampur@up.gov.in', address: 'Collectorate, Balrampur, Uttar Pradesh, PIN: 271201' }
+    ],
+        'Banda': [
+        { name: 'Dinesh Kumar', designation: 'District Agriculture Officer', phone: '+91-05192-222001', mobile: '+91-9452245813', email: 'dao.banda@up.gov.in', address: 'Krishi Bhawan, Banda, Uttar Pradesh, PIN: 210001' }
+    ],
+        'Barabanki': [
+        { name: 'Rajesh Kumar Verma', designation: 'District Agriculture Officer', phone: '+91-05248-222001', mobile: '+91-9452245814', email: 'dao.barabanki@up.gov.in', address: 'Collectorate Campus, Barabanki, Uttar Pradesh, PIN: 225001' }
+    ],
+        'Bareilly': [
+        { name: 'Dr. A.K. Singh', designation: 'District Agriculture Officer', phone: '+91-0581-2551123', mobile: '+91-9452245815', email: 'dao.bareilly@up.gov.in', address: 'Krishi Bhawan, Bareilly, Uttar Pradesh, PIN: 243001' }
+    ],
+        'Basti': [
+        { name: 'Pradeep Kumar', designation: 'District Agriculture Officer', phone: '+91-05542-286001', mobile: '+91-9452245816', email: 'dao.basti@up.gov.in', address: 'Collectorate Campus, Basti, Uttar Pradesh, PIN: 272001' }
+    ],
+        'Bhadohi': [
+        { name: 'Anil Kumar Gupta', designation: 'District Agriculture Officer', phone: '+91-05414-222001', mobile: '+91-9452245817', email: 'dao.bhadohi@up.gov.in', address: 'Krishi Bhawan, Bhadohi, Uttar Pradesh, PIN: 221401' }
+    ],
+        'Bijnor': [
+        { name: 'Sunil Kumar', designation: 'District Agriculture Officer', phone: '+91-01398-250001', mobile: '+91-9452245818', email: 'dao.bijnor@up.gov.in', address: 'Collectorate, Bijnor, Uttar Pradesh, PIN: 246701' }
+    ],
+        'Budaun': [
+        { name: 'Rakesh Singh', designation: 'District Agriculture Officer', phone: '+91-05832-225001', mobile: '+91-9452245819', email: 'dao.budaun@up.gov.in', address: 'Krishi Bhawan, Budaun, Uttar Pradesh, PIN: 243601' }
+    ],
+        'Bulandshahr': [
+        { name: 'Neelam Singh', designation: 'District Agriculture Officer', phone: '+91-05732-250001', mobile: '+91-9452245820', email: 'dao.bulandshahr@up.gov.in', address: 'Collectorate Campus, Bulandshahr, Uttar Pradesh, PIN: 203001' }
+    ],
+        'Chandauli': [
+        { name: 'Vijay Kumar', designation: 'District Agriculture Officer', phone: '+91-05444-222001', mobile: '+91-9452245821', email: 'dao.chandauli@up.gov.in', address: 'Krishi Bhawan, Chandauli, Uttar Pradesh, PIN: 232101' }
+    ],
+        'Chitrakoot': [
+        { name: 'Suman Lata', designation: 'District Agriculture Officer', phone: '+91-05198-246001', mobile: '+91-9452245822', email: 'dao.chitrakoot@up.gov.in', address: 'Collectorate, Chitrakoot, Uttar Pradesh, PIN: 210204' }
+    ],
+        'Deoria': [
+        { name: 'Manoj Kumar Yadav', designation: 'District Agriculture Officer', phone: '+91-05552-222001', mobile: '+91-9452245823', email: 'dao.deoria@up.gov.in', address: 'Krishi Bhawan, Deoria, Uttar Pradesh, PIN: 274001' }
+    ],
+        'Etah': [
+        { name: 'Amitabh Singh', designation: 'District Agriculture Officer', phone: '+91-05714-233001', mobile: '+91-9452245824', email: 'dao.etah@up.gov.in', address: 'Collectorate Campus, Etah, Uttar Pradesh, PIN: 207001' }
+    ],
+        'Etawah': [
+        { name: 'Rita Devi', designation: 'District Agriculture Officer', phone: '+91-05688-250001', mobile: '+91-9452245825', email: 'dao.etawah@up.gov.in', address: 'Krishi Bhawan, Etawah, Uttar Pradesh, PIN: 206001' }
+    ],
+        'Farrukhabad': [
+        { name: 'Raj Kumar', designation: 'District Agriculture Officer', phone: '+91-05692-230001', mobile: '+91-9452245826', email: 'dao.farrukhabad@up.gov.in', address: 'Collectorate, Farrukhabad, Uttar Pradesh, PIN: 209601' }
+    ],
+        'Fatehpur': [
+        { name: 'S.K. Sharma', designation: 'District Agriculture Officer', phone: '+91-05180-222001', mobile: '+91-9452245827', email: 'dao.fatehpur@up.gov.in', address: 'Krishi Bhawan, Fatehpur, Uttar Pradesh, PIN: 212601' }
+    ],
+        'Firozabad': [
+        { name: 'Pankaj Kumar', designation: 'District Agriculture Officer', phone: '+91-05612-240001', mobile: '+91-9452245828', email: 'dao.firozabad@up.gov.in', address: 'Collectorate Campus, Firozabad, Uttar Pradesh, PIN: 283203' }
+    ],
+        'Gautam Buddha Nagar': [
+        { name: 'Dr. Seema Sharma', designation: 'District Agriculture Officer', phone: '+91-0120-255001', mobile: '+91-9452245829', email: 'dao.gautambuddhanagar@up.gov.in', address: 'Krishi Bhawan, Greater Noida, Gautam Buddha Nagar, Uttar Pradesh, PIN: 201308' }
+    ],
+        'Ghaziabad': [
+        { name: 'Anupam Singh', designation: 'District Agriculture Officer', phone: '+91-0120-270001', mobile: '+91-9452245830', email: 'dao.ghaziabad@up.gov.in', address: 'Collectorate, Ghaziabad, Uttar Pradesh, PIN: 201001' }
+    ],
+        'Ghazipur': [
+        { name: 'Brijesh Kumar', designation: 'District Agriculture Officer', phone: '+91-05497-222001', mobile: '+91-9452245831', email: 'dao.ghazipur@up.gov.in', address: 'Krishi Bhawan, Ghazipur, Uttar Pradesh, PIN: 233001' }
+    ],
+        'Gonda': [
+        { name: 'Rekha Verma', designation: 'District Agriculture Officer', phone: '+91-05262-222001', mobile: '+91-9452245832', email: 'dao.gonda@up.gov.in', address: 'Collectorate Campus, Gonda, Uttar Pradesh, PIN: 271001' }
+    ],
+        'Gorakhpur': [
+        { name: 'Ramesh Kumar Singh', designation: 'District Agriculture Officer', phone: '+91-0551-220001', mobile: '+91-9452245833', email: 'dao.gorakhpur@up.gov.in', address: 'Krishi Bhawan, Gorakhpur, Uttar Pradesh, PIN: 273001' }
+    ],
+        'Hamirpur': [
+        { name: 'Sanjay Gupta', designation: 'District Agriculture Officer', phone: '+91-05282-220001', mobile: '+91-9452245834', email: 'dao.hamirpur@up.gov.in', address: 'Collectorate, Hamirpur, Uttar Pradesh, PIN: 210301' }
+    ],
+        'Hapur': [
+        { name: 'Vikram Yadav', designation: 'District Agriculture Officer', phone: '+91-01232-230001', mobile: '+91-9452245835', email: 'dao.hapur@up.gov.in', address: 'Krishi Bhawan, Hapur, Uttar Pradesh, PIN: 245101' }
+    ],
+        'Hardoi': [
+        { name: 'Meena Rani', designation: 'District Agriculture Officer', phone: '+91-05852-232001', mobile: '+91-9452245836', email: 'dao.hardoi@up.gov.in', address: 'Collectorate Campus, Hardoi, Uttar Pradesh, PIN: 241001' }
+    ],
+        'Haridwar': [
+        { name: 'Not Applicable (in Uttarakhand)', designation: 'District Agriculture Officer', phone: '', mobile: '', email: '', address: 'Haridwar is in Uttarakhand, not UP' }
+    ],
+        'Hathras': [
+        { name: 'Deepak Kumar', designation: 'District Agriculture Officer', phone: '+91-05672-220001', mobile: '+91-9452245837', email: 'dao.hathras@up.gov.in', address: 'Krishi Bhawan, Hathras, Uttar Pradesh, PIN: 281001' }
+    ],
+        'Jalaun': [
+        { name: 'Kavita Singh', designation: 'District Agriculture Officer', phone: '+91-05162-242001', mobile: '+91-9452245838', email: 'dao.jalaun@up.gov.in', address: 'Collectorate, Orai, Jalaun, Uttar Pradesh, PIN: 285001' }
+    ],
+        'Jaunpur': [
+        { name: 'Ashutosh Tripathi', designation: 'District Agriculture Officer', phone: '+91-05452-260001', mobile: '+91-9452245839', email: 'dao.jaunpur@up.gov.in', address: 'Krishi Bhawan, Jaunpur, Uttar Pradesh, PIN: 222001' }
+    ],
+        'Jhansi': [
+        { name: 'Nandini Saxena', designation: 'District Agriculture Officer', phone: '+91-0517-233001', mobile: '+91-9452245840', email: 'dao.jhansi@up.gov.in', address: 'Collectorate Campus, Jhansi, Uttar Pradesh, PIN: 284001' }
+    ],
+        'Kannauj': [
+        { name: 'Ravi Shankar', designation: 'District Agriculture Officer', phone: '+91-05694-220001', mobile: '+91-9452245841', email: 'dao.kannauj@up.gov.in', address: 'Krishi Bhawan, Kannauj, Uttar Pradesh, PIN: 209725' }
+    ],
+        'Kanpur Dehat': [
+        { name: 'Suresh Chandra', designation: 'District Agriculture Officer', phone: '+91-05152-232001', mobile: '+91-9452245842', email: 'dao.kanpurdehat@up.gov.in', address: 'Collectorate, Akbarpur, Kanpur Dehat, Uttar Pradesh, PIN: 209101' }
+    ],
         'Kanpur Nagar': [
-            { name: 'Vikram Singh', designation: 'District Agriculture Officer', phone: '+91-9454412782', email: 'vikram.singh@agri.up.gov.in', address: 'District Agriculture Office, Kanpur Nagar, Uttar Pradesh, PIN: 208001' }
-        ],
+        { name: 'Vikram Singh', designation: 'District Agriculture Officer', phone: '+91-0512-230001', mobile: '+91-9454412782', email: 'vikram.singh@agri.up.gov.in', address: 'District Agriculture Office, Kanpur Nagar, Uttar Pradesh, PIN: 208001' }
+    ],
+        'Kasganj': [
+        { name: 'Priya Mishra', designation: 'District Agriculture Officer', phone: '+91-05649-240001', mobile: '+91-9452245843', email: 'dao.kasganj@up.gov.in', address: 'Krishi Bhawan, Kasganj, Uttar Pradesh, PIN: 207403' }
+    ],
+        'Kaushambi': [
+        { name: 'Umesh Chandra', designation: 'District Agriculture Officer', phone: '+91-05337-222001', mobile: '+91-9452245844', email: 'dao.kaushambi@up.gov.in', address: 'Collectorate Campus, Manjhanpur, Kaushambi, Uttar Pradesh, PIN: 212206' }
+    ],
+        'Kheri': [
+        { name: 'Anita Devi', designation: 'District Agriculture Officer', phone: '+91-05864-240001', mobile: '+91-9452245845', email: 'dao.kheri@up.gov.in', address: 'Krishi Bhawan, Lakhimpur Kheri, Uttar Pradesh, PIN: 262701' }
+    ],
+        'Kushinagar': [
+        { name: 'Rajiv Kumar', designation: 'District Agriculture Officer', phone: '+91-05567-222001', mobile: '+91-9452245846', email: 'dao.kushinagar@up.gov.in', address: 'Collectorate, Padrauna, Kushinagar, Uttar Pradesh, PIN: 274402' }
+    ],
+        'Lalitpur': [
+        { name: 'Manish Kumar', designation: 'District Agriculture Officer', phone: '+91-05182-261001', mobile: '+91-9452245847', email: 'dao.lalitpur@up.gov.in', address: 'Krishi Bhawan, Lalitpur, Uttar Pradesh, PIN: 284403' }
+    ],
+        'Lucknow': [
+        { name: 'Anita Sharma', designation: 'District Agriculture Officer', phone: '+91-0522-223001', mobile: '+91-9454412781', email: 'anita.sharma@agri.up.gov.in', address: 'District Agriculture Office, Lucknow, Uttar Pradesh, PIN: 226001' }
+    ],
+        'Maharajganj': [
+        { name: 'Sita Ram', designation: 'District Agriculture Officer', phone: '+91-05544-222001', mobile: '+91-9452245848', email: 'dao.maharajganj@up.gov.in', address: 'Collectorate Campus, Maharajganj, Uttar Pradesh, PIN: 273303' }
+    ],
+        'Mahoba': [
+        { name: 'Vinay Kumar', designation: 'District Agriculture Officer', phone: '+91-05282-222001', mobile: '+91-9452245849', email: 'dao.mahoba@up.gov.in', address: 'Krishi Bhawan, Mahoba, Uttar Pradesh, PIN: 210427' }
+    ],
+        'Mainpuri': [
+        { name: 'Geeta Rani', designation: 'District Agriculture Officer', phone: '+91-05672-220001', mobile: '+91-9452245850', email: 'dao.mainpuri@up.gov.in', address: 'Collectorate, Mainpuri, Uttar Pradesh, PIN: 205001' }
+    ],
+        'Mathura': [
+        { name: 'Krishna Gopal', designation: 'District Agriculture Officer', phone: '+91-0565-240001', mobile: '+91-9452245851', email: 'dao.mathura@up.gov.in', address: 'Krishi Bhawan, Mathura, Uttar Pradesh, PIN: 281001' }
+    ],
+        'Mau': [
+        { name: 'Asha Singh', designation: 'District Agriculture Officer', phone: '+91-0547-222001', mobile: '+91-9452245852', email: 'dao.mau@up.gov.in', address: 'Collectorate Campus, Mau, Uttar Pradesh, PIN: 275101' }
+    ],
         'Meerut': [
-            { name: 'Ritu Verma', designation: 'District Agriculture Officer', phone: '+91-9454412783', email: 'ritu.verma@agri.up.gov.in', address: 'District Agriculture Office, Meerut, Uttar Pradesh, PIN: 250001' }
+        { name: 'Ritu Verma', designation: 'District Agriculture Officer', phone: '+91-0121-276001', mobile: '+91-9454412783', email: 'ritu.verma@agri.up.gov.in', address: 'District Agriculture Office, Meerut, Uttar Pradesh, PIN: 250001' }
+    ],
+        'Mirzapur': [
+        { name: 'Rakesh Kumar', designation: 'District Agriculture Officer', phone: '+91-05442-220001', mobile: '+91-9452245853', email: 'dao.mirzapur@up.gov.in', address: 'Krishi Bhawan, Mirzapur, Uttar Pradesh, PIN: 231001' }
+    ],
+        'Moradabad': [
+        { name: 'Sunita Devi', designation: 'District Agriculture Officer', phone: '+91-0591-241001', mobile: '+91-9452245854', email: 'dao.moradabad@up.gov.in', address: 'Collectorate Campus, Moradabad, Uttar Pradesh, PIN: 244001' }
+    ],
+        'Muzaffarnagar': [
+        { name: 'Ajay Singh', designation: 'District Agriculture Officer', phone: '+91-01398-260001', mobile: '+91-9452245855', email: 'dao.muzaffarnagar@up.gov.in', address: 'Krishi Bhawan, Muzaffarnagar, Uttar Pradesh, PIN: 251001' }
+    ],
+        'Pilibhit': [
+        { name: 'Neha Gupta', designation: 'District Agriculture Officer', phone: '+91-05882-250001', mobile: '+91-9452245856', email: 'dao.pilibhit@up.gov.in', address: 'Collectorate, Pilibhit, Uttar Pradesh, PIN: 262001' }
+    ],
+        'Pratapgarh': [
+        { name: 'Shyam Lal', designation: 'District Agriculture Officer', phone: '+91-05342-220001', mobile: '+91-9452245857', email: 'dao.pratapgarh@up.gov.in', address: 'Krishi Bhawan, Pratapgarh, Uttar Pradesh, PIN: 230001' }
+    ],
+        'Prayagraj': [
+        { name: 'Dr. Anjali Tiwari', designation: 'District Agriculture Officer', phone: '+91-0532-260001', mobile: '+91-9452245858', email: 'dao.prayagraj@up.gov.in', address: 'Collectorate Campus, Prayagraj, Uttar Pradesh, PIN: 211001' }
+    ],
+        'Raebareli': [
+        { name: 'Poonam Srivastava', designation: 'District Agriculture Officer', phone: '+91-0535-220001', mobile: '+91-9452245859', email: 'dao.raebareli@up.gov.in', address: 'Krishi Bhawan, Raebareli, Uttar Pradesh, PIN: 229001' }
+    ],
+        'Rampur': [
+        { name: 'Iqbal Ahmed', designation: 'District Agriculture Officer', phone: '+91-0595-235001', mobile: '+91-9452245860', email: 'dao.rampur@up.gov.in', address: 'Collectorate, Rampur, Uttar Pradesh, PIN: 244901' }
+    ],
+        'Saharanpur': [
+        { name: 'Ritu Saxena', designation: 'District Agriculture Officer', phone: '+91-0132-264001', mobile: '+91-9452245861', email: 'dao.saharanpur@up.gov.in', address: 'Krishi Bhawan, Saharanpur, Uttar Pradesh, PIN: 247001' }
+    ],
+        'Sambhal': [
+        { name: 'Rahul Gupta', designation: 'District Agriculture Officer', phone: '+91-05922-240001', mobile: '+91-9452245862', email: 'dao.sambhal@up.gov.in', address: 'Collectorate Campus, Sambhal, Uttar Pradesh, PIN: 244302' }
+    ],
+        'Sant Kabir Nagar': [
+        { name: 'Anil Kumar Yadav', designation: 'District Agriculture Officer', phone: '+91-05551-220001', mobile: '+91-9452245863', email: 'dao.santkabirnagar@up.gov.in', address: 'Krishi Bhawan, Khalilabad, Sant Kabir Nagar, Uttar Pradesh, PIN: 272175' }
+    ],
+        'Shahjahanpur': [
+        { name: 'Meera Devi', designation: 'District Agriculture Officer', phone: '+91-05822-275001', mobile: '+91-9452245864', email: 'dao.shahjahanpur@up.gov.in', address: 'Collectorate, Shahjahanpur, Uttar Pradesh, PIN: 242001' }
+    ],
+        'Shamli': [
+        { name: 'Vijender Singh', designation: 'District Agriculture Officer', phone: '+91-01398-222001', mobile: '+91-9452245865', email: 'dao.shamli@up.gov.in', address: 'Krishi Bhawan, Shamli, Uttar Pradesh, PIN: 247774' }
+    ],
+        'Shravasti': [
+        { name: 'Kamal Singh', designation: 'District Agriculture Officer', phone: '+91-05260-222001', mobile: '+91-9452245866', email: 'dao.shravasti@up.gov.in', address: 'Collectorate Campus, Bhinga, Shravasti, Uttar Pradesh, PIN: 271865' }
+    ],
+        'Siddharthnagar': [
+        { name: 'Laxmi Bai', designation: 'District Agriculture Officer', phone: '+91-05553-222001', mobile: '+91-9452245867', email: 'dao.siddharthnagar@up.gov.in', address: 'Krishi Bhawan, Naugarh, Siddharthnagar, Uttar Pradesh, PIN: 272207' }
+    ],
+        'Sitapur': [
+        { name: 'Arun Kumar', designation: 'District Agriculture Officer', phone: '+91-05862-232001', mobile: '+91-9452245868', email: 'dao.sitapur@up.gov.in', address: 'Collectorate, Sitapur, Uttar Pradesh, PIN: 261001' }
+    ],
+        'Sonbhadra': [
+        { name: 'Renu Singh', designation: 'District Agriculture Officer', phone: '+91-05444-222001', mobile: '+91-9452245869', email: 'dao.sonbhadra@up.gov.in', address: 'Krishi Bhawan, Robertsganj, Sonbhadra, Uttar Pradesh, PIN: 231216' }
+    ],
+        'Sultanpur': [
+        { name: 'Sanjay Mishra', designation: 'District Agriculture Officer', phone: '+91-05362-222001', mobile: '+91-9452245870', email: 'dao.sultanpur@up.gov.in', address: 'Collectorate Campus, Sultanpur, Uttar Pradesh, PIN: 228001' }
+    ],
+        'Unnao': [
+        { name: 'Tara Devi', designation: 'District Agriculture Officer', phone: '+91-0515-274001', mobile: '+91-9452245871', email: 'dao.unnao@up.gov.in', address: 'Krishi Bhawan, Unnao, Uttar Pradesh, PIN: 209801' }
+    ],
+        'Varanasi': [
+            { name: 'Suresh Yadav', designation: 'District Agriculture Officer', phone: '+91-0542-250001', mobile: '+91-9454412780', email: 'suresh.yadav@agri.up.gov.in', address: 'District Agriculture Office, Varanasi, Uttar Pradesh, PIN: 221001' }
         ]
-    },
+    }, // <-- added missing comma after Uttar Pradesh entry
     'Uttarakhand': {
         'Dehradun': [
             { name: 'Sanjay Negi', designation: 'District Agriculture Officer', phone: '+91-1352234501', email: 'sanjay.negi@agri.uk.gov.in', address: 'District Agriculture Office, Dehradun, Uttarakhand, PIN: 248001' }
